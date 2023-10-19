@@ -37,7 +37,7 @@ jobs:
       id: jacoco
       uses: madrapps/jacoco-report@v1.6.1
       with:
-        paths: ${{ github.workspace }}/build/reports/jacoco/report.xml
+        paths: ${{ github.workspace }}/target/jacoco.xml
         token: ${{ secrets.GITHUB_TOKEN }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
@@ -62,11 +62,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=smling_secure-coding-demo -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/build/reports/jacoco/report.xml
+      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=smling_secure-coding-demo -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/target/jacoco.xml
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: artifacts
         path: |
-          ${{ github.workspace }}/build/
+          ${{ github.workspace }}/target/
