@@ -69,4 +69,4 @@ jobs:
       with:
         name: artifacts
         path: |
-          ${{ github.workspace }}/**/build/
+          ${{ github.workspace }}/build/
