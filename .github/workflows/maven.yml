@@ -27,17 +27,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Run unit tests
+      run: mvn verify
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    - name: Run unit tests
-      run: mvn test
 
     - name: Generate coverage report
       id: jacoco
       uses: madrapps/jacoco-report@v1.6.1
       with:
-        paths: ${{ github.workspace }}/**/build/reports/jacoco/report.xml
+        paths: ${{ github.workspace }}/build/reports/jacoco/report.xml
         token: ${{ secrets.GITHUB_TOKEN }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
@@ -62,7 +62,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=smling_secure-coding-demo -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/**/build/reports/jacoco/report.xml
+      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=smling_secure-coding-demo -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/build/reports/jacoco/report.xml
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
