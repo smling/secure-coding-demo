@@ -59,7 +59,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar \
+      run: >
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar \
           -Dsonar.projectKey=smling_secure-coding-demo \
           -Dsonar.dependencyCheck.jsonReportPath=${{ github.workspace }}/target/dependency-check-report.json \
           -Dsonar.dependencyCheck.htmlReportPath=${{ github.workspace }}/target/dependency-check-report.html
