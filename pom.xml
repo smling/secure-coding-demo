@@ -90,6 +90,12 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<formats>
+						<format>HTML</format>
+						<format>JSON</format>
+					</formats>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
